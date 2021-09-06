@@ -1,6 +1,9 @@
+// def env = System.getenv()
+// def version = env['NEW_VERSION']
+
 def buildApp() {
     echo "Building the application"
-    echo "Building the version ${env.NEW_VERSION}"
+    // echo "Building the version ${version}"
 
 }
 
