@@ -1,7 +1,7 @@
 def buildApp() {
     echo "Building the application"
-    echo "Building the version ${NEW_VERSION}"
-    sh "mvn clean package"
+    echo "Building the version ${env.NEW_VERSION}"
+
 }
 
 def testApp() {
