@@ -1,3 +1,4 @@
+def gv
 pipeline {
     agent any
     environment {
@@ -12,22 +13,28 @@ pipeline {
     }
     
     stages {
+        stage ("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
         stage("Code Checkout"){
             steps {
                 git 'https://github.com/judedotcom/hello-world.git'
-                // echo "Branch name is ${env.GIT_BRANCH}"
             }
         }
         stage("Build") {
-            // when {
-            //     expression {
-            //         ((env.GIT_BRANCH == 'dev') || (env.GIT_BRANCH = 'master'))
-            //     }
-            // }
             steps {
-                echo "Building the application"
-                echo "Building the version ${NEW_VERSION}"
-                sh "mvn clean package"
+                // echo "Building the application"
+                // echo "Building the version ${NEW_VERSION}"
+                // sh "mvn clean package"
+
+                script {
+                    gv.buildApp()              
+                }
             }
         }
         
@@ -38,14 +45,22 @@ pipeline {
                 }
             }
             steps {
-                echo "Testing the application"
+                // echo "Testing the application"
+                script {
+                    gv.testApp()              
+                }
+
             }
         }
         
         stage("Deploy") {
             steps {
-                echo "Deploying the code"
-                echo "deploying the code ${params.VERSION}"
+                // echo "Deploying the code"
+                // echo "deploying the code ${params.VERSION}"
+                script {
+                    gv.deployApp()              
+                }
+
             }
         }
     }
