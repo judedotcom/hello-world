@@ -3,7 +3,7 @@
 
 def buildApp() {
     echo "Building the application"
-    // echo "Building the version ${version}"
+    echo "Building the version ${env.NEW_VERSION}"
 
 }
 
